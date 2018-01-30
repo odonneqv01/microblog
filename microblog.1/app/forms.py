@@ -44,7 +44,7 @@ class AddTeam(FlaskForm):
 class AddPlayers(FlaskForm):
     playerName = StringField('Full Name', validators=[DataRequired()])
     playerNationality = StringField('Nationality', validators=[DataRequired()])
-    playerPosition = StringField('Position', validators=[DataRequired])
+    playerPosition = StringField('Position', validators=[DataRequired()])
     playerClub = StringField('Club', validators=[DataRequired()])
     playerAge = IntegerField('Age', validators=[DataRequired()])
     submit = SubmitField('Submit')
