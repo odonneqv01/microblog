@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add Player</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.playerName.label }}<br>
+            {{ form.playerName(size=32) }}<br>
+            {% for error in form.playerName.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.playerNationality.label }}<br>
+            {{ form.playerNationality(size=64) }}<br>
+            {% for error in form.playerNationality.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.playerPosition.label }}<br>
+            {{ form.playerPosition(size=32) }}<br>
+            {% for error in form.playerPosition.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.playerClub.label }}<br>
+            {{ form.playerClub(size=32) }}<br>
+            {% for error in form.playerClub.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.playerAge.label }}<br>
+            {{ form.playerAge(size=32) }}<br>
+            {% for error in form.playerAge.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

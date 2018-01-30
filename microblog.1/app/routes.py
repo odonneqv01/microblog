@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, flash, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, AddTeam, AddPlayers
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Team, Players
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -101,3 +101,27 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',form=form)
+
+
+
+@app.route('/addTeam', methods=['GET', 'POST'])
+def addTeam():
+    form = AddTeam()
+    if form.validate_on_submit():
+        team = Team(teamName=form.teamName.data, homeGround=form.homeGround.data, city=form.city.data)
+        db.session.add(team)
+        db.session.commit()
+        flash('You added a team')
+        return redirect(url_for('login'))
+    return render_template('teams.html', title='Add Team', form=form)
+
+@app.route('/addPlayers', methods=['GET', 'POST'])
+def addPlayers():
+    form = AddPlayers()
+    if form.validate_on_submit():
+        player = Players(playerName=form.playerName.data, playerNationality=form.playerNationality.data, playerPosition=form.playerPosition.data, playerClub=form.playerClub.data, playerAge=form.playerAge.data)
+        db.session.add(player)
+        db.session.commit()
+        flash('You added a player')
+        return redirect(url_for('login'))
+    return render_template('players.html', title='Add Player', form=form)
